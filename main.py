@@ -3,7 +3,7 @@ import os
 from ldap3 import Server, Connection
 from dotenv import load_dotenv
 
-from modules.functions import get_pass_lifetime_left
+from modules.functions import get_pass_lifetime_left, sort_users
 
 load_dotenv()
 
@@ -16,6 +16,7 @@ START_ALARM_PERIOD = int(os.getenv('START_ALARM_PERIOD', ''))
 server = Server(SERVER, use_ssl=True)
 
 
+@sort_users(START_ALARM_PERIOD)
 def get_users_list():
 
     with Connection(server, USER, PASSWORD, auto_bind=True) as conn:
