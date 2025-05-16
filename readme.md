@@ -1,4 +1,5 @@
 **Скрипт, написанный на python, который извлекает информацию об учётных записях из Active Directory, у которых подходит к концу срок действия. Работает на python версии 3.9.** 
+Взаимодействие с Active Directory осуществляется с использованием библиотеки `ldap3`. Подробнее можно ознакомиться по [ссылке](https://ldap3.readthedocs.io/en/latest/index.html).
 ### Подготовка к использованию:
 * cоздать виртуальное окружение python `python -m venv venv` и активировать его `source venv/Scripts/activate`;
 * установить зависимости `pip install -r requirements.txt`;
