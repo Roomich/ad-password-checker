@@ -1,5 +1,7 @@
 from datetime import datetime, timedelta
 
+import pandas as pd
+
 
 def get_pass_lifetime_left(pass_lifetime, str_date):
 
@@ -23,6 +25,19 @@ def sort_users(parameter):
             return [i for i in result if i['days_left'] <= parameter]
         return wrapper
     return get_function
+
+
+def export_to_excel(data):
+    filename = 'filename.xlsx'
+    dataframe = pd.DataFrame(data)
+    with pd.ExcelWriter(filename, engine='xlsxwriter') as writer:
+        dataframe.to_excel(writer, sheet_name='passwords', index=False)
+        worksheet = writer.sheets['passwords']
+        for idx, col in enumerate(dataframe.columns):
+            column_len = dataframe[col].astype(str).map(len).max()
+            column_len = max(column_len, len(col))
+            worksheet.set_column(idx, idx, column_len + 2)
+    return filename
 
 
 if __name__ == '__main__':

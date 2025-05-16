@@ -3,7 +3,11 @@ import os
 from ldap3 import Server, Connection
 from dotenv import load_dotenv
 
-from modules.functions import get_pass_lifetime_left, sort_users
+from modules.functions import (
+    get_pass_lifetime_left,
+    sort_users,
+    export_to_excel
+)
 
 load_dotenv()
 
@@ -41,4 +45,6 @@ def get_users_list():
 
 
 if __name__ == '__main__':
-    print(get_users_list())
+    data = get_users_list()
+    
+    print(export_to_excel(data))
