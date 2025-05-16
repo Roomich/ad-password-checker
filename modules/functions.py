@@ -2,9 +2,11 @@ from datetime import datetime, timedelta
 
 
 def get_pass_lifetime_left(pass_lifetime, str_date):
-    
-    delta = timedelta(days=pass_lifetime)    
-    format = '%Y-%m-%d %H:%M:%S'    
+
+    str_date = str_date.split('.')[0]
+
+    delta = timedelta(days=pass_lifetime)
+    format = '%Y-%m-%d %H:%M:%S'
 
     pass_changed = datetime.strptime(str_date, format)
     today = datetime.today()
@@ -18,7 +20,7 @@ def sort_users(parameter):
     def get_function(function):
         def wrapper(*args, **kwargs):
             result = function()
-            return [i for i in result if i['days_left'] < parameter]
+            return [i for i in result if i['days_left'] <= parameter]
         return wrapper
     return get_function
 

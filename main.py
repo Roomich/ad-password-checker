@@ -27,14 +27,12 @@ def get_users_list():
             attributes=['cn', 'pwdLastSet']
         )
 
-        get_str_datetime = lambda x: x.split('.')[0] if isinstance(x, str) else None
-
         result = [
             {
-                'name' : entry.cn.values[0],
+                'name': entry.cn.values[0],
                 'days_left': get_pass_lifetime_left(
                     PASSWORD_TTL,
-                    get_str_datetime(str(entry['pwdLastSet']))
+                    str(entry['pwdLastSet'])
                 )
             } for entry in conn.entries
         ]
