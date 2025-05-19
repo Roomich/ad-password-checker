@@ -44,7 +44,10 @@ def get_users_list():
     return result
 
 
-if __name__ == '__main__':
+def main():
     data = get_users_list()
-    
     print(export_to_excel(data))
+
+
+if __name__ == '__main__':
+    main()
