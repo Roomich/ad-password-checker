@@ -27,7 +27,7 @@ def get_users_list():
 
         conn.search(
             'dc=main,dc=nces,dc=by',
-            '(description=*[tech]*)',
+            '(&(description=*ОССТИ*)(objectClass=user))',
             attributes=['cn', 'pwdLastSet']
         )
 
@@ -45,8 +45,10 @@ def get_users_list():
 
 
 def main():
-    data = get_users_list()
-    print(export_to_excel(data))
+    data = print(get_users_list())
+    if data:
+        print(export_to_excel(data))
+        os.remove('filename.xlsx')
 
 
 if __name__ == '__main__':
