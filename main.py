@@ -45,10 +45,10 @@ def get_users_list():
 
 
 def main():
-    data = print(get_users_list())
+    data = get_users_list()
     if data:
-        print(export_to_excel(data))
-        os.remove('filename.xlsx')
+        export_to_excel(data)
+    # os.remove('filename.xlsx')
 
 
 if __name__ == '__main__':

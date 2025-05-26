@@ -6,7 +6,10 @@ import pandas as pd
 
 def get_pass_lifetime_left(pass_lifetime, str_date):
 
-    str_date = str_date.split('.')[0]
+    if '.' not in str_date:
+        str_date = str_date.split('+')[0]
+    else:
+        str_date = str_date.split('.')[0]
 
     delta = timedelta(days=pass_lifetime)
     format = '%Y-%m-%d %H:%M:%S'
