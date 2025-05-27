@@ -28,7 +28,7 @@ def get_users_list():
         conn.search(
             'dc=main,dc=nces,dc=by',
             '(&(description=*ОССТИ*)(objectClass=user))',
-            attributes=['cn', 'pwdLastSet']
+            attributes=['cn', 'pwdLastSet', 'userAccountControl']
         )
 
         result = [
@@ -37,7 +37,8 @@ def get_users_list():
                 'days_left': get_pass_lifetime_left(
                     PASSWORD_TTL,
                     str(entry['pwdLastSet'])
-                )
+                ),
+                'acccountCode': entry.userAccountControl[0]
             } for entry in conn.entries
         ]
 

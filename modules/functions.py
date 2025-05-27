@@ -22,11 +22,18 @@ def get_pass_lifetime_left(pass_lifetime, str_date):
     return days_left
 
 
+# Code 66050 - user is blocked
+# Code 66048 - password never expires
+# Code 512 - normal user
 def sort_users(parameter):
     def get_function(function):
         def wrapper(*args, **kwargs):
             result = function()
-            return [i for i in result if i['days_left'] <= parameter]
+            return [
+                i for i in result
+                if i['days_left'] <= parameter
+                and i['userAccountControl' != 66050]
+            ]
         return wrapper
     return get_function
 
