@@ -31,8 +31,8 @@ def sort_users(parameter):
             result = function()
             return [
                 i for i in result
-                if i['days_left'] <= parameter
-                and i['userAccountControl' != 66050]
+                if i['daysLeft'] <= parameter
+                and i['acccountCode'] != 66050
             ]
         return wrapper
     return get_function

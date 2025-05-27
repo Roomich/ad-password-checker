@@ -34,7 +34,7 @@ def get_users_list():
         result = [
             {
                 'name': entry.cn.values[0],
-                'days_left': get_pass_lifetime_left(
+                'daysLeft': get_pass_lifetime_left(
                     PASSWORD_TTL,
                     str(entry['pwdLastSet'])
                 ),
