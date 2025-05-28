@@ -22,13 +22,13 @@ server = Server(SERVER, use_ssl=True)
 
 
 @sort_users(START_ALARM_PERIOD)
-def get_users_list():
+def get_users_list(department=None):
 
     with Connection(server, USER, PASSWORD, auto_bind=True) as conn:
 
         conn.search(
             'dc=main,dc=nces,dc=by',
-            '(&(description=*ОССТИ*)(objectClass=user))',
+            '(&(description=*ОАИС*)(objectClass=user))',
             attributes=['cn', 'pwdLastSet', 'userAccountControl']
         )
 
@@ -47,6 +47,11 @@ def get_users_list():
 
 
 def main():
+    departments = {
+        'ОССТИ': 'ossti@nces.by',
+        'ОАИС': 'oais@nces.by',
+        'ОВиСУ': 'ovisu@nces.by'
+    }
     data = get_users_list()
     if data:
         filename = export_to_excel(data)
@@ -58,7 +63,7 @@ def main():
         subject = 'Учётные записи с истекающим сроком действия пароля'
         text = '''
 Hello my friend!
-This is a test message!
+This message was generated automatically!
 Do not respond it!
 '''
         send_email(text, mail_server, server_port,
